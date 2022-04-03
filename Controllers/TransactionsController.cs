@@ -35,7 +35,7 @@ namespace SampleBank.Controllers
             }
 
             var transaction = await _context.Transaction
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (transaction == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace SampleBank.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Amount,TransactionType,Success,Date,FromAccountId,ToAccountId")] Transaction transaction)
+        public async Task<IActionResult> Create([Bind("id,Amount,TransactionType,Success,Date")] Transaction transaction)
         {
             
             if (ModelState.IsValid)
@@ -88,9 +88,9 @@ namespace SampleBank.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Amount,TransactionType,Success,Date,FromAccountId,ToAccountId")] Transaction transaction)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Amount,TransactionType,Success,Date")] Transaction transaction)
         {
-            if (id != transaction.Id)
+            if (id != transaction.id)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace SampleBank.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TransactionExists(transaction.Id))
+                    if (!TransactionExists(transaction.id))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace SampleBank.Controllers
             }
 
             var transaction = await _context.Transaction
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.id == id);
             if (transaction == null)
             {
                 return NotFound();
@@ -149,7 +149,7 @@ namespace SampleBank.Controllers
 
         private bool TransactionExists(int id)
         {
-            return _context.Transaction.Any(e => e.Id == id);
+            return _context.Transaction.Any(e => e.id == id);
         }
     }
 }

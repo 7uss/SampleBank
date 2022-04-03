@@ -100,14 +100,14 @@ namespace SampleBank.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Display(Name = "First Name")]
-            public string FirstName { get; set; }
+            public string firstName { get; set; }
             
             [Display(Name = "Last Name")]
-            public string LastName { get; set; }
+            public string lastName { get; set; }
             
             [DataType(DataType.Date)]
             [Display(Name = "Date Of Birth")]
-            public DateTime DateOfBirth { get; set; }
+            public DateTime dateOfBirth { get; set; }
         }
 
 
@@ -125,9 +125,9 @@ namespace SampleBank.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
-                user.DateOfBirth = Input.DateOfBirth;
+                user.firstName = Input.firstName;
+                user.lastName = Input.lastName;
+                user.dateOfBirth = Input.dateOfBirth;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

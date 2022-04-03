@@ -4,16 +4,10 @@ namespace SampleBank.Models
 {
     public class AdvanceUser : IdentityUser
     {
-        public AdvanceUser(string firstName, string lastName, DateTime dateOfBirth)
-        {
-            this.FirstName = firstName;
-            this.LastName = lastName;
-            this.DateOfBirth = dateOfBirth;
-        }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public DateTime DateOfBirth { get; set; }
-
-        public virtual ICollection<BankAccount> BankAccounts { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public DateTime dateOfBirth { get; set; }
+        public ICollection<BankAccount>? bankAccounts { get; set; }
+        public ICollection<BankAccount>? beneficiaryAccounts { get; set; }
     }
 }

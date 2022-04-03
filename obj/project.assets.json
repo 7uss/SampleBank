@@ -1644,6 +1644,18 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
       },
+      "NodaTime/3.0.10": {
+        "type": "package",
+        "dependencies": {
+          "System.Runtime.CompilerServices.Unsafe": "4.7.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/NodaTime.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/NodaTime.dll": {}
+        }
+      },
       "NuGet.Common/5.11.0": {
         "type": "package",
         "dependencies": {
@@ -5958,6 +5970,20 @@
         "packageIcon.png"
       ]
     },
+    "NodaTime/3.0.10": {
+      "sha512": "ss+WtJonasLC0kA9/WXliusI+c34zIofHxluTn+6tbYSP8EX8Q1zQUFoQxt2OaqmAt23mA4H+KH/nVAZ+em3aw==",
+      "type": "package",
+      "path": "nodatime/3.0.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/NodaTime.dll",
+        "lib/netstandard2.0/NodaTime.pdb",
+        "lib/netstandard2.0/NodaTime.xml",
+        "nodatime.3.0.10.nupkg.sha512",
+        "nodatime.nuspec"
+      ]
+    },
     "NuGet.Common/5.11.0": {
       "sha512": "WCHexQBfSqBDRqP3PSDSUw7YM+PwuvMHGAkT/sXI5UHze4T41yLE+VB/km2Fe0z9y3m2mudcr2djFZezivjMJw==",
       "type": "package",
@@ -10184,6 +10210,7 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 6.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.3",
       "Microsoft.VisualStudio.web.CodeGeneration.design >= 6.0.2",
+      "NodaTime >= 3.0.10",
       "microsoft.entityframeworkcore.design >= 6.0.3",
       "microsoft.entityframeworkcore.sqlserver >= 6.0.3"
     ]
@@ -10254,6 +10281,10 @@
           "Microsoft.VisualStudio.web.CodeGeneration.design": {
             "target": "Package",
             "version": "[6.0.2, )"
+          },
+          "NodaTime": {
+            "target": "Package",
+            "version": "[3.0.10, )"
           },
           "microsoft.entityframeworkcore.design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

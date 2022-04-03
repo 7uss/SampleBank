@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SampleBank.Data;
 
@@ -10,27 +11,13 @@ using SampleBank.Data;
 namespace SampleBank.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220331175848_changeBankAccountReferencesInTransactions")]
+    partial class changeBankAccountReferencesInTransactions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
-
-            modelBuilder.Entity("AdvanceUserBankAccount", b =>
-                {
-                    b.Property<int>("beneficiaryAccountsid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("beneficiaryUsersId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("beneficiaryAccountsid", "beneficiaryUsersId");
-
-                    b.HasIndex("beneficiaryUsersId");
-
-                    b.ToTable("AdvanceUserBankAccount");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -257,7 +244,6 @@ namespace SampleBank.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("userId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("id");
@@ -303,21 +289,6 @@ namespace SampleBank.Data.Migrations
                     b.HasIndex("toBankAccountid");
 
                     b.ToTable("Transaction");
-                });
-
-            modelBuilder.Entity("AdvanceUserBankAccount", b =>
-                {
-                    b.HasOne("SampleBank.Models.BankAccount", null)
-                        .WithMany()
-                        .HasForeignKey("beneficiaryAccountsid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SampleBank.Models.AdvanceUser", null)
-                        .WithMany()
-                        .HasForeignKey("beneficiaryUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -375,9 +346,7 @@ namespace SampleBank.Data.Migrations
                 {
                     b.HasOne("SampleBank.Models.AdvanceUser", "user")
                         .WithMany("bankAccounts")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("userId");
 
                     b.Navigation("user");
                 });

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SampleBank.Data;
 
@@ -10,27 +11,13 @@ using SampleBank.Data;
 namespace SampleBank.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220328182220_camelCaseTableDataFields")]
+    partial class camelCaseTableDataFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
-
-            modelBuilder.Entity("AdvanceUserBankAccount", b =>
-                {
-                    b.Property<int>("beneficiaryAccountsid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("beneficiaryUsersId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("beneficiaryAccountsid", "beneficiaryUsersId");
-
-                    b.HasIndex("beneficiaryUsersId");
-
-                    b.ToTable("AdvanceUserBankAccount");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -257,7 +244,6 @@ namespace SampleBank.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("userId")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("id");
@@ -279,13 +265,13 @@ namespace SampleBank.Data.Migrations
                     b.Property<int>("bankAccountid")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("fromBankAccountid")
+                    b.Property<int?>("fromAccountId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("success")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("toBankAccountid")
+                    b.Property<int?>("toAccountId")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("transactionDate")
@@ -298,26 +284,7 @@ namespace SampleBank.Data.Migrations
 
                     b.HasIndex("bankAccountid");
 
-                    b.HasIndex("fromBankAccountid");
-
-                    b.HasIndex("toBankAccountid");
-
                     b.ToTable("Transaction");
-                });
-
-            modelBuilder.Entity("AdvanceUserBankAccount", b =>
-                {
-                    b.HasOne("SampleBank.Models.BankAccount", null)
-                        .WithMany()
-                        .HasForeignKey("beneficiaryAccountsid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SampleBank.Models.AdvanceUser", null)
-                        .WithMany()
-                        .HasForeignKey("beneficiaryUsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -375,9 +342,7 @@ namespace SampleBank.Data.Migrations
                 {
                     b.HasOne("SampleBank.Models.AdvanceUser", "user")
                         .WithMany("bankAccounts")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("userId");
 
                     b.Navigation("user");
                 });
@@ -390,19 +355,7 @@ namespace SampleBank.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SampleBank.Models.BankAccount", "fromBankAccount")
-                        .WithMany("outgoingTransactions")
-                        .HasForeignKey("fromBankAccountid");
-
-                    b.HasOne("SampleBank.Models.BankAccount", "toBankAccount")
-                        .WithMany("incomingTransactions")
-                        .HasForeignKey("toBankAccountid");
-
                     b.Navigation("bankAccount");
-
-                    b.Navigation("fromBankAccount");
-
-                    b.Navigation("toBankAccount");
                 });
 
             modelBuilder.Entity("SampleBank.Models.AdvanceUser", b =>
@@ -412,10 +365,6 @@ namespace SampleBank.Data.Migrations
 
             modelBuilder.Entity("SampleBank.Models.BankAccount", b =>
                 {
-                    b.Navigation("incomingTransactions");
-
-                    b.Navigation("outgoingTransactions");
-
                     b.Navigation("transactions");
                 });
 #pragma warning restore 612, 618

@@ -13,22 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Amount)
+                @Html.DisplayNameFor(model => model.amount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TransactionType)
+                @Html.DisplayNameFor(model => model.transactionType)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Success)
+                @Html.DisplayNameFor(model => model.success)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayNameFor(model => model.transactionDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FromAccountId)
+                @Html.DisplayNameFor(model => model.fromBankAccount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ToAccountId)
+                @Html.DisplayNameFor(model => model.toBankAccount)
             </th>
             <th></th>
         </tr>
@@ -37,27 +37,27 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
+                @Html.DisplayFor(modelItem => item.amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TransactionType)
+                @Html.DisplayFor(modelItem => item.transactionType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Success)
+                @Html.DisplayFor(modelItem => item.success)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.transactionDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FromAccountId)
+                @Html.DisplayFor(modelItem => item.fromBankAccount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ToAccountId)
+                @Html.DisplayFor(modelItem => item.toBankAccount)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
             </td>
         </tr>
 }

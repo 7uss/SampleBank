@@ -11,44 +11,44 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Amount)
+            @Html.DisplayNameFor(model => model.amount)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Amount)
+            @Html.DisplayFor(model => model.amount)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TransactionType)
+            @Html.DisplayNameFor(model => model.transactionType)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TransactionType)
+            @Html.DisplayFor(model => model.transactionType)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Success)
+            @Html.DisplayNameFor(model => model.success)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Success)
+            @Html.DisplayFor(model => model.success)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.transactionDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
+            @Html.DisplayFor(model => model.transactionDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FromAccountId)
+            @Html.DisplayNameFor(model => model.fromBankAccount)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FromAccountId)
+            @Html.DisplayFor(model => model.fromBankAccount)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ToAccountId)
+            @Html.DisplayNameFor(model => model.toBankAccount)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ToAccountId)
+            @Html.DisplayFor(model => model.toBankAccount)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

@@ -61,14 +61,14 @@ namespace SampleBank.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
             
             [Display(Name = "First Name")]
-            public string FirstName { get; set; }
+            public string firstName { get; set; }
             
             [Display(Name = "Last Name")]
-            public string LastName { get; set; }
+            public string lastName { get; set; }
             
             [DataType(DataType.Date)]
             [Display(Name = "Date Of Birth")]
-            public DateTime DateOfBirth { get; set; }
+            public DateTime dateOfBirth { get; set; }
         }
 
         private async Task LoadAsync(AdvanceUser user)
@@ -82,9 +82,9 @@ namespace SampleBank.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                DateOfBirth = user.DateOfBirth
+                firstName = user.firstName,
+                lastName = user.lastName,
+                dateOfBirth = user.dateOfBirth
             };
         }
 
@@ -103,9 +103,9 @@ namespace SampleBank.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
-            user.LastName = Input.LastName;
-            user.FirstName = Input.FirstName;
-            user.DateOfBirth = Input.DateOfBirth;
+            user.lastName = Input.lastName;
+            user.firstName = Input.firstName;
+            user.dateOfBirth = Input.dateOfBirth;
             
             await _userManager.UpdateAsync(user);
 

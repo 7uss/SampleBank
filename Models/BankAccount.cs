@@ -1,34 +1,32 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace SampleBank.Models
-{ 
+{
     public class BankAccount
     {
-        public BankAccount(){}
         
-        public BankAccount(int id, string accountNumber, DateTime expirationDate, string beneficiaryName, string cardNumber)
-        {
-            this.Id = id;
-            this.AccountNumber = accountNumber;
-            this.ExpirationDate = expirationDate;
-            this.BeneficiaryName = beneficiaryName;
-            this.CardNumber = cardNumber;
+        public BankAccount(){}
+        public BankAccount(int id, string accountNumber, DateTime expirationDate, string beneficiaryName, string cardNumber){
+            
+            this.id = id;
+            this.accountNumber = accountNumber;
+            this.expirationDate = expirationDate;
+            this.beneficiaryName = beneficiaryName;
+            this.cardNumber = cardNumber;
 
         }
-        public int Id { get; set; }
-        public string AccountNumber { get; set; }
+        public int id { get; set; }
+        public string accountNumber { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime ExpirationDate { get; set; }
-
-        public string BeneficiaryName { get; set; }
-
-        public string CardNumber { get; set; }
-
-        public AdvanceUser User { get; set; }
-
-        public virtual ICollection<Transaction> Transactions { get; set; }
-
+        public DateTime expirationDate { get; set; }
+        public string beneficiaryName { get; set; }
+        public string cardNumber { get; set; }
+        public AdvanceUser user { get; set; }
+        public ICollection<Transaction>? transactions { get; set; }
+        public ICollection<Transaction>? incomingTransactions { get; set; }
+        public ICollection<Transaction>? outgoingTransactions { get; set; }
+        public ICollection<AdvanceUser>? beneficiaryUsers { get; set; }
 
     }
 }
