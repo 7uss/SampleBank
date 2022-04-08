@@ -1,0 +1,29 @@
+@model SampleBank.Models.Transaction
+
+@{
+	ViewData["Title"] = "Create";
+}
+
+<h1>deposit</h1>
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			  <input type="hidden" name="transactionType" value=@transactionTypes.deposit>
+				<input type="hidden" name="accountId" value=@ViewBag.accountId>
+				<div class="form-group">
+					<label asp-for="amount" class="control-label"></label>
+					<input asp-for="amount" class="form-control col-4" id="depositAmount"/>
+					<span asp-validation-for="amount" class="text-danger"></span>
+					<small class="form-text text-muted">Enter the amount you would like to deposit into your account</small>
+				</div>
+				<input id="resultingBalance" class="form-control" type="text" placeholder="Readonly input here…" readonly>
+				<div class="form-group mt-2">
+					<input type="submit" value="Create" class="btn btn-primary"/>
+				</div>
+		</form>
+	</div>
+</div>
+
+

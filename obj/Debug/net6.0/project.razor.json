@@ -16443,6 +16443,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_WithdrawForm.cshtml",
+      "TargetPath": "Views\\Transactions\\_WithdrawForm.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_DepositForm.cshtml",
+      "TargetPath": "Views\\Transactions\\_DepositForm.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/husseiny.a.z/Documents/SampleBank/Areas/Identity/Pages/Error.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Error.cshtml",
       "FileKind": "mvc"
@@ -16450,6 +16460,11 @@
     {
       "FilePath": "/Users/husseiny.a.z/Documents/SampleBank/Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_OuterTransactionForm.cshtml",
+      "TargetPath": "Views\\Transactions\\_OuterTransactionForm.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16560,6 +16575,11 @@
     {
       "FilePath": "/Users/husseiny.a.z/Documents/SampleBank/Areas/Identity/Pages/Account/Login.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\Account\\Login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_innerTransactionForm.cshtml",
+      "TargetPath": "Views\\Transactions\\_innerTransactionForm.cshtml",
       "FileKind": "mvc"
     },
     {

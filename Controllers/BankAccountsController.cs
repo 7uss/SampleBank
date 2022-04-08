@@ -20,8 +20,7 @@ namespace SampleBank.Controllers
 		private readonly UserManager<AdvanceUser> _userManager;
 		private readonly SignInManager<AdvanceUser> _signInManager;
 
-		public BankAccountsController(ApplicationDbContext context, UserManager<AdvanceUser> userManager, SignInManager<AdvanceUser> signInManager)
-		{
+		public BankAccountsController(ApplicationDbContext context, UserManager<AdvanceUser> userManager, SignInManager<AdvanceUser> signInManager){
 			_context = context;
 			_userManager = userManager;
 			_signInManager = signInManager;
@@ -29,25 +28,25 @@ namespace SampleBank.Controllers
 
 		// GET: BankAccounts
 		[Authorize]
-		public async Task<IActionResult> Index()
-		{
+		public async Task<IActionResult> Index(){
+
+			// before i used user.bankAccounts.ToList() to fetch the user's bank accounts and it worked very well but then i'm not sure what
+			// happened and it stopped giving me any restult. like all i did was update the database with some new fields and for some reason
+			// it doesn't work anymore (what could be the reason for this????)
 			var user = await _userManager.GetUserAsync(User);
-			var bankAccounts = user.bankAccounts?.ToList() ?? Enumerable.Empty<BankAccount>();
+			var bankAccounts = _context.BankAccount.Where(b => b.user.Equals(user));
 			return View(bankAccounts);
 			// return View(await _context.BankAccount.ToListAsync());
 		}
 
 		// GET: BankAccounts/Details/5
 		[Authorize]
-		public async Task<IActionResult> Details(int? id)
-		{
-			if (id == null)
-			{
+		public async Task<IActionResult> Details(int? id){
+			if (id == null){
 				return NotFound();
 			}
 
-			var bankAccount = await _context.BankAccount
-					.FirstOrDefaultAsync(m => m.id == id);
+			var bankAccount = await _context.BankAccount.FirstOrDefaultAsync(m => m.id == id);
 			if (bankAccount == null)
 			{
 				return NotFound();

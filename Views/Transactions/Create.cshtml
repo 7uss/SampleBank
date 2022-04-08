@@ -1,45 +1,38 @@
 @model SampleBank.Models.Transaction
 
 @{
-    ViewData["Title"] = "Create";
+		ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+@{
+	switch (ViewBag.transactionType){
+		case "deposit":
+			Html.RenderPartial("_DepositForm", Model);
+			break;
+		case "withdraw":
+			Html.RenderPartial("_WithdrawForm", Model);
+			break;
+		case "innerTransaction":
+			Html.RenderPartial("_InnerTransactionForm", Model);
+			break;
+		case "outerTransaction":
+			Html.RenderPartial("_OuterTransactionForm", Model);
+			break;
+	}
+}
 
-<h4>Transaction</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="amount" class="control-label"></label>
-                <input asp-for="amount" class="form-control" />
-                <span asp-validation-for="amount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="transactionType" class="control-label"></label>
-                <select asp-for="transactionType" asp-items="Html.GetEnumSelectList<transactionTypes>()">
-                    <option selected="selected" value="">Please select</option>
-                </select>
-                <span asp-validation-for="transactionType" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="success" /> @Html.DisplayNameFor(model => model.success)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+		<script>
+			var oldBlanace = "@ViewBag.accountBalance";
+			var depositInput = document.getElementById("depositAmount");
+			var resultingBalanceInput = document.getElementById("resultingBalance");
+			$(document).on('input', '#depositAmount', function () {
+				if (depositInput.value)
+					resultingBalanceInput.placeholder = parseFloat(depositInput.value) + parseFloat(oldBlanace);
+				else
+					resultingBalanceInput.placeholder = "";
+			});
+		</script>
+		@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

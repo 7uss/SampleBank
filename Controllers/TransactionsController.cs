@@ -45,8 +45,11 @@ namespace SampleBank.Controllers
         }
 
         // GET: Transactions/Create
-        public IActionResult Create()
-        {
+        public async Task<IActionResult> Create(int accountId, string transactionType){
+            var bankAccount = await _context.BankAccount.FindAsync(accountId);
+            ViewBag.transactionType = transactionType;
+            ViewBag.accountBalance = bankAccount.balance;
+            ViewBag.accountId = accountId;
             return View();
         }
 
@@ -55,11 +58,22 @@ namespace SampleBank.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Amount,TransactionType,Success,Date")] Transaction transaction)
-        {
-            
+        public async Task<IActionResult> Create([Bind("amount, transactioType")] Transaction transaction, int accountId){
+            var bankAccount = await _context.BankAccount.Include(b => b.user).FirstOrDefaultAsync(b => b.id == accountId);
+            var newBalance = bankAccount.balance + transaction.amount;
+            transaction.bankAccount = bankAccount;
+            transaction.oldBalance = bankAccount.balance;
+            transaction.newBalance = newBalance;
+            transaction.transactionDate = DateTime.Now;
+
+            ModelState.Clear();
+            // this attempts to update the record and stores any logs any resulting errors such as Validation errors in the ModelState.
+            await TryUpdateModelAsync(transaction);
+
             if (ModelState.IsValid)
             {
+                bankAccount.balance = newBalance;
+                transaction.success = true;
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

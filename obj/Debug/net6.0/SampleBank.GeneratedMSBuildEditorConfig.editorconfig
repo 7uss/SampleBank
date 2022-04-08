@@ -235,6 +235,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL0luZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_DepositForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL19EZXBvc2l0Rm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_innerTransactionForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL19pbm5lclRyYW5zYWN0aW9uRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_OuterTransactionForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL19PdXRlclRyYW5zYWN0aW9uRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_WithdrawForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL19XaXRoZHJhd0Zvcm0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/husseiny.a.z/Documents/SampleBank/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

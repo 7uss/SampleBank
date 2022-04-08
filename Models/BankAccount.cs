@@ -1,21 +1,26 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace SampleBank.Models
 {
     public class BankAccount
     {
-        
-        public BankAccount(){}
-        public BankAccount(int id, string accountNumber, DateTime expirationDate, string beneficiaryName, string cardNumber){
-            
+
+        public BankAccount() {}
+        public BankAccount(int id, decimal balance, string accountNumber, DateTime expirationDate, string beneficiaryName, string cardNumber, AdvanceUser user)
+        {
             this.id = id;
+            this.balance = balance;
             this.accountNumber = accountNumber;
             this.expirationDate = expirationDate;
             this.beneficiaryName = beneficiaryName;
             this.cardNumber = cardNumber;
-
+            this.user = user;
         }
         public int id { get; set; }
+
+        [Precision(4)]
+        public decimal balance { get; set; }
         public string accountNumber { get; set; }
 
         [DataType(DataType.Date)]
