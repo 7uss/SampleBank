@@ -19,6 +19,8 @@ public class ApplicationDbContext : IdentityDbContext<AdvanceUser>
         builder.Entity<BankAccount>().HasOne(u => u.user).WithMany(b => b.bankAccounts);
     }
 
+    public DbSet<SampleBank.Models.AdvanceUser> AspNetUsers { get; set; }
     public DbSet<SampleBank.Models.BankAccount> BankAccount { get; set; }
     public DbSet<SampleBank.Models.Transaction> Transaction { get; set; }
+    
 }
