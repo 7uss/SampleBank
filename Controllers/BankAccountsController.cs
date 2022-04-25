@@ -26,16 +26,39 @@ namespace SampleBank.Controllers
 			_signInManager = signInManager;
 		}
 
+		// GET: AddBeneficiaries
+		[Authorize]
+		public IActionResult AddBeneficiaries(){
+			return View();
+		}
+
+		[HttpPost]
+		[Authorize]
+		public async Task<IActionResult> AddBeneficiaries(string beneficiaryAccountNumber){
+			var userId = _userManager.GetUserId(User);
+			AdvanceUser user = await _context.AspNetUsers.Include(u => u.beneficiaryAccounts).FirstOrDefaultAsync(u => u.Id == userId);
+			BankAccount beneficiaryAccount = await _context.BankAccount.FirstOrDefaultAsync(b => b.accountNumber == beneficiaryAccountNumber && b.user != user);
+			if (beneficiaryAccount != null && !user.beneficiaryAccounts.Contains(beneficiaryAccount)){
+				
+				user.beneficiaryAccounts.Add(beneficiaryAccount);
+				_context.SaveChanges();
+
+				TempData["notice"] = "Benefeiciary account was added successfully.";
+				return RedirectToAction(nameof(Index));
+			}else{
+				TempData["error"] = "Please enter a valid bank account number.";
+				return View();
+			}
+		}
+
+		
 		// GET: BankAccounts
 		[Authorize]
 		public async Task<IActionResult> Index(){
-
-			// before i used user.bankAccounts.ToList() to fetch the user's bank accounts and it worked very well but then i'm not sure what
-			// happened and it stopped giving me any restult. like all i did was update the database with some new fields and for some reason
-			// it doesn't work anymore (what could be the reason for this????)
-			var user = await _userManager.GetUserAsync(User);
-			var bankAccounts = _context.BankAccount.Where(b => b.user.Equals(user));
-			return View(bankAccounts);
+			
+			var userId = _userManager.GetUserId(User);
+			AdvanceUser user = await _context.AspNetUsers.Include(u => u.bankAccounts).FirstOrDefaultAsync(u => u.Id == userId);
+			return View(user.bankAccounts);
 			// return View(await _context.BankAccount.ToListAsync());
 		}
 

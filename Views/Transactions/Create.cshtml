@@ -5,34 +5,65 @@
 }
 
 @{
-	switch (ViewBag.transactionType){
-		case "deposit":
-			Html.RenderPartial("_DepositForm", Model);
+	switch (TempData["transactionType"]){
+		case transactionTypes.deposit:
+			<partial name="_DepositForm" model="Model"/>
 			break;
-		case "withdraw":
-			Html.RenderPartial("_WithdrawForm", Model);
+		case transactionTypes.withdraw:
+			<partial name="_WithdrawForm" model="Model"/>
 			break;
-		case "innerTransaction":
-			Html.RenderPartial("_InnerTransactionForm", Model);
+		case transactionTypes.innerTransfer:
+			<partial name="_InnerTransactionForm" model="Model"/>
 			break;
-		case "outerTransaction":
-			Html.RenderPartial("_OuterTransactionForm", Model);
+		case transactionTypes.outerTransfer:
+			<partial name="_OuterTransactionForm" model="Model"/>
 			break;
 	}
 }
 
+@section Styles {
+	@switch (TempData["transactionType"]){
+		case transactionTypes.deposit:
+		case transactionTypes.withdraw:
+			<link href="@Url.Content("~/css/_DepositForm.css")" rel="stylesheet" type="text/css" />
+			break;
+		case transactionTypes.innerTransfer:
+		case transactionTypes.outerTransfer:
+			<link href="@Url.Content("~/css/_InnerTransactionForm.css")" rel="stylesheet" type="text/css" />
+			break;
+	}
+}
 
 @section Scripts {
 		<script>
-			var oldBlanace = "@ViewBag.accountBalance";
-			var depositInput = document.getElementById("depositAmount");
-			var resultingBalanceInput = document.getElementById("resultingBalance");
-			$(document).on('input', '#depositAmount', function () {
-				if (depositInput.value)
-					resultingBalanceInput.placeholder = parseFloat(depositInput.value) + parseFloat(oldBlanace);
-				else
-					resultingBalanceInput.placeholder = "";
+			$(document).ready(function(){
+				var amountInput = document.getElementById("amountInput");
+				var submitButton = document.getElementById("submitButton");
+				
+				// below i am set an event listener on the amount input box so i could track the amount entered
+				$("#amountInput").on('input', function () {
+					if (amountInput.value && amountInput.value > 0){
+						// here i am enabling the submit button if an amount was entered
+						submitButton.disabled = false;
+					}else{
+						// here i am disabling the submit button if no amount was entered
+						submitButton.disabled = true;
+					}	
+				});
+				
 			});
 		</script>
+
+		
+		@switch (TempData["transactionType"]){
+			case transactionTypes.deposit:
+			case transactionTypes.withdraw:
+				<script src="~/js/_DepositForm.js"></script>
+				break;
+			case transactionTypes.innerTransfer:
+			case transactionTypes.outerTransfer:
+				<script src="~/js/_InnerTransactionForm.js"></script>
+				break;
+		}
 		@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

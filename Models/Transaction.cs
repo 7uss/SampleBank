@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SampleBank.Models
 {
-    public enum transactionTypes { deposit, withdraw, transfer }
+    public enum transactionTypes { deposit, withdraw, innerTransfer, outerTransfer }
 
     public class Transaction
     {

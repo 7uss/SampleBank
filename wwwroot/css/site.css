@@ -16,3 +16,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.flash-banner .btn-close {
+  /* background-color: white; */
+  color: red;
+  opacity: 1;
+}
+
+.error {
+  background-color: #CC3300;
+  color: white;
+}
+
+.notice {
+  background-color: #339900;
+  color: white;
+}
+
+.alert {
+  background-color: #FFCC00;
+  color: #36454F;
+}

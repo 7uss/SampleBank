@@ -22,6 +22,10 @@ public class HomeController : Controller
         _signInManager = signInManager;
     }
 
+    public IActionResult Actions(){
+        return View();
+    }
+
     public IActionResult Index()
     {
         return View();
