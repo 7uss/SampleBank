@@ -1,0 +1,66 @@
+.cards-container{
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+label {
+    width: 100%;
+    font-size: 1rem;
+}
+  
+.card-input-element+.bank-card {
+/* height: calc(36px + 2*1rem); */
+/* color:darkorchid; */
+-webkit-box-shadow: none;
+box-shadow: none;
+border: 2px solid lightgray;
+border-radius: 10px;
+}
+
+.card-input-element+.bank-card:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked+.bank-card {
+    border: 2px solid darkorchid;
+    border-radius: 10px;
+    -webkit-transition: border .3s;
+    -o-transition: border .3s;
+    transition: border .3s;
+}
+
+.card-input-element:checked+.bank-card::after {
+/* content: '\e5ca'; */
+/* color: #AFB8EA; */
+/* font-family: 'Material Icons'; */
+/* font-size: 24px; */
+-webkit-animation-name: fadeInCheckbox;
+animation-name: fadeInCheckbox;
+-webkit-animation-duration: .5s;
+animation-duration: .5s;
+-webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@-webkit-keyframes fadeInCheckbox {
+from {
+    opacity: 0;
+    -webkit-transform: rotateZ(-20deg);
+}
+to {
+    opacity: 1;
+    -webkit-transform: rotateZ(0deg);
+}
+}
+
+@keyframes fadeInCheckbox {
+from {
+    opacity: 0;
+    transform: rotateZ(-20deg);
+}
+to {
+    opacity: 1;
+    transform: rotateZ(0deg);
+}
+}
+  

@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Actions";
+}
+
+<h1>Actions</h1>
+<hr/>
+
+<div class="w-75 m-auto">
+    
+    <a asp-controller="BankAccounts" asp-action="AddBeneficiaries" method="get" class="list-group-item list-group-item-action flex-column align-items-start mb-4">
+        <h5 class="mb-1">Add Beneficiary Account</h5>
+        <p class="mb-1">
+            This action allows you to add beneficiary accounts.<br>
+            Adding a beneficiary account will allow you to easily transfer funds to that account.
+        </p>
+    </a>
+    <a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.deposit" class="list-group-item list-group-item-action flex-column align-items-start mb-4">
+        <h5 class="mb-1">Deposit</h5>
+        <p class="mb-1">
+            This action allows you to add beneficiary accounts.<br>
+            Adding a beneficiary account will allow you to easily transfer funds to that account.
+        </p>
+    </a>
+    <a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.withdraw" class="list-group-item list-group-item-action flex-column align-items-start mb-4">
+        <h5 class="mb-1">Withdraw</h5>
+        <p class="mb-1">
+            This action allows you to freely transfer funds between your registered accounts.<br>
+            Simply select the account to transfer FROM, the account to transfer To, and the AMOUNT you would like to transfer.
+        </p>
+    </a>
+    <a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.outerTransfer" method="get" class="list-group-item list-group-item-action flex-column align-items-start mb-4">
+        <h5 class="mb-1">Transfer Funds To Beneficiary Accounts</h5>
+        <p class="mb-1">
+            This action allows you to freely transfer funds to your added beneficiary accounts.<br>
+            Simply select the account to transfer FROM, the account to transfer To, and the AMOUNT you would like to transfer.
+        </p>
+    </a>
+    <a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.innerTransfer" class="list-group-item list-group-item-action flex-column align-items-start mb-4">
+        <h5 class="mb-1">Transfer Funds Between Own Accounts</h5>
+        <p class="mb-1">
+            This action allows you to freely transfer funds to your added beneficiary accounts.<br>
+            Simply select the account to transfer FROM, the account to transfer To, and the AMOUNT you would like to transfer.
+        </p>
+    </a>
+
+</div>
