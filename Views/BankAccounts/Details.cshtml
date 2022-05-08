@@ -47,13 +47,13 @@
 	<a asp-action="Index">Back to List</a>
 </div>
 
-<div class="container col-8">
+<div class="container col-6">
 	<div class="row justify-content-around">
-		<a asp-controller="Transactions" asp-action="Create" asp-route-accountId="@Model?.id" asp-route-transactionType="outerTransaction" method="get" class="col btn btn-dark col-2">Transfer To Beneficiary</a>
-		<a asp-controller="Transactions" asp-action="Create" asp-route-accountId="@Model?.id" asp-route-transactionType="innerTransaction" method="get" class="col btn btn-dark col-2">Transfer Between Accounts</a>
+		<a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.outerTransfer" method="get" class="col btn btn-dark col-4">Transfer To Beneficiary</a>
+		<a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.innerTransfer" method="get" class="col btn btn-dark col-4">Transfer Between Accounts</a>
 	</div>
 	<div class="row mt-2 justify-content-around">
-		<a asp-controller="Transactions" asp-action="Create" asp-route-accountId="@Model?.id" asp-route-transactionType="withdraw" method="get" class="col btn btn-dark col-2">Withdraw</a>
-		<a asp-controller="Transactions" asp-action="Create" asp-route-accountId="@Model?.id" asp-route-transactionType="deposit" method="get" class="col btn btn-dark col-2">Deposit</a>
+		<a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.withdraw" method="get" class="col btn btn-dark col-4">Withdraw</a>
+		<a asp-controller="Transactions" asp-action="Create" asp-route-transactionType="@transactionTypes.deposit" method="get" class="col btn btn-dark col-4">Deposit</a>
 	</div>
 </div>

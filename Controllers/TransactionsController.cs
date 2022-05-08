@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,12 @@ namespace SampleBank.Controllers
     public class TransactionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AdvanceUser> _userManager;
 
-        public TransactionsController(ApplicationDbContext context)
+        public TransactionsController(ApplicationDbContext context, UserManager<AdvanceUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Transactions
@@ -45,11 +48,16 @@ namespace SampleBank.Controllers
         }
 
         // GET: Transactions/Create
-        public async Task<IActionResult> Create(int accountId, string transactionType){
-            var bankAccount = await _context.BankAccount.FindAsync(accountId);
-            ViewBag.transactionType = transactionType;
-            ViewBag.accountBalance = bankAccount.balance;
-            ViewBag.accountId = accountId;
+        public async Task<IActionResult> Create(transactionTypes transactionType){
+            var userId = _userManager.GetUserId(User);
+            var user = await _context.AspNetUsers.AsNoTracking().Include(u => u.beneficiaryAccounts).Include(u => u.bankAccounts).FirstOrDefaultAsync(u => u.Id == userId);
+            TempData["transactionType"] = transactionType;
+            ViewBag.userBankAccounts = user.bankAccounts;
+
+            if (transactionType == transactionTypes.outerTransfer){
+                ViewBag.userBeneficiaryAccounts = user.beneficiaryAccounts;
+            }
+            
             return View();
         }
 
@@ -58,16 +66,45 @@ namespace SampleBank.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("amount, transactioType")] Transaction transaction, int accountId){
+        public async Task<IActionResult> Create([Bind("amount, transactionType")] Transaction transaction, int? accountId, int? toAccountId){
+            if (accountId == toAccountId && accountId != null){
+                // TempData["transactionType"] = transaction.transactionType;
+                TempData["error"] = "cannot select the same bank account for both ends of the transaction";
+                return RedirectToAction("Create", new { transactionType = transaction.transactionType});
+            }
+
             var bankAccount = await _context.BankAccount.Include(b => b.user).FirstOrDefaultAsync(b => b.id == accountId);
-            var newBalance = bankAccount.balance + transaction.amount;
+            if(transaction.transactionType != transactionTypes.deposit && transaction.amount > bankAccount.balance){
+                TempData["error"] = "The amount you entered exceeds you account limit. please trye again.";
+                return RedirectToAction("Create", new { transactionType = transaction.transactionType});
+            }
+            
+            decimal newBalance;
+
+            // setting the balance resulting from the transaction
+            if (transaction.transactionType == transactionTypes.deposit)
+                newBalance = bankAccount.balance + transaction.amount;
+            else
+                newBalance = bankAccount.balance - transaction.amount;
+
+            
+            // setting the bank account that the transaction was sent to incase of transfer transactions
+            bool toBankAccountExists = toAccountId != null ? _context.BankAccount.Any(b => b.id == toAccountId) : false;
+            if (toAccountId != null && toBankAccountExists && (transaction.transactionType == transactionTypes.innerTransfer || transaction.transactionType == transactionTypes.outerTransfer)){
+                var toBankAccount = await _context.BankAccount.Include(b => b.user).FirstOrDefaultAsync(b => b.id == toAccountId);
+                transaction.fromBankAccount = bankAccount;
+                transaction.toBankAccount = toBankAccount;
+                toBankAccount.balance += transaction.amount;
+            }
+            
+            // setting remaining transaction data
             transaction.bankAccount = bankAccount;
             transaction.oldBalance = bankAccount.balance;
             transaction.newBalance = newBalance;
             transaction.transactionDate = DateTime.Now;
 
             ModelState.Clear();
-            // this attempts to update the record and stores any logs any resulting errors such as Validation errors in the ModelState.
+            // this attempts to update the record and stores any resulting errors such as Validation errors in the ModelState.
             await TryUpdateModelAsync(transaction);
 
             if (ModelState.IsValid)
@@ -76,9 +113,10 @@ namespace SampleBank.Controllers
                 transaction.success = true;
                 _context.Add(transaction);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["notice"] = "Transaction Completed Successfully";
+                return RedirectToAction("Index", "Home");
             }
-            return View(transaction);
+            return View();
         }
 
         // GET: Transactions/Edit/5

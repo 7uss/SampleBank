@@ -1,0 +1,47 @@
+@* @model SampleBank.Models.BankAccount
+ *@
+@{
+    ViewData["Title"] = "Add Beneficiaries";
+}
+
+<h1>Add Beneficiary Accounts</h1>
+
+<hr />
+<form asp-controller="BankAccounts" asp-action="AddBeneficiaries">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group col-3">
+        <label>Beneficiary account number</label>
+        <input class="" type="text" name="beneficiaryAccountNumber" id="beneficiaryAccountNumber"/>
+        @* <div class="invalid-feedback" id="invalidFeedback"></div> *@
+    </div>
+    <div class="form-group mt-2">
+        <input type="submit" value="submit transaction" class="btn btn-primary" id="submitButton" disabled/>
+    </div>
+</form>
+
+
+@section Scripts {
+    <script>
+        var inputField = document.getElementById("beneficiaryAccountNumber");
+        var submitButton = document.getElementById("submitButton");
+        var invalidFeedbackLabel = document.getElementById("invalidFeedback");
+
+        if ('@ViewData["error"]'){
+            invalidFeedbackLabel.innerHTML = '@ViewData["error"]';
+            @* inputField.classList.add("is-invalid"); *@
+        }
+        
+        // below i am set an event listener on the amount input box so i could track the amount entered
+        $(document).on('input', inputField, function () {
+            if (inputField.value){
+                // here i am enabling the submit button if an account number was entered
+                submitButton.disabled = false;
+            }else{
+                // here i am disabling the submit button if no account number was entered
+                submitButton.disabled = true;
+            }
+        });
+    </script>
+}
+
+

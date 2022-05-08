@@ -7,8 +7,40 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SampleBank.styles.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" />
+    <link rel="stylesheet" href="~/lib/font-Awesome/css/regular.min.css">
+    <link rel="stylesheet" href="~/lib/font-Awesome/css/solid.min.css">
 </head>
 <body>
+    @* 
+    this entire code block is responsible for showing the error, alert, and notice flash messages if any 
+    were entered into the TempData Disctionary.
+    *@
+    @{
+        string? bannerClass = null;
+        string? bannerMessage = null;
+    }
+    @if (TempData.ContainsKey("error")){
+        bannerClass = "error";
+        bannerMessage = TempData["error"]?.ToString();
+        TempData.Remove("error");
+    }else if(TempData.ContainsKey("notice")){
+        bannerClass = "notice";
+        bannerMessage = TempData["notice"]?.ToString();
+        TempData.Remove("notice");
+    }else if(TempData.ContainsKey("alert")){
+        bannerClass = "alert";
+        bannerMessage = TempData["alert"]?.ToString();
+        TempData.Remove("alert");
+    }
+    @if (bannerClass != null && bannerMessage != null){
+        <div class="@bannerClass d-flex justify-content-between w-100 h-auto p-2 flash-banner m-0" id="flashBanner">
+            <span class="message">@bannerMessage</span>
+            <button type="button" class="btn-close btn-close-white" aria-label="Close" id="flashBannerClose"></button>
+        </div>
+    }
+    
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -20,13 +52,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-controller="BankAccounts" asp-action="Index">Bank Accounts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BankAccounts" asp-action="Index">Bank Accounts</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Actions">Actions</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -48,6 +80,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/Chart.js/chart.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Styles", required: false)
 </body>
 </html>

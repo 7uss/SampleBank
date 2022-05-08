@@ -175,6 +175,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/husseiny.a.z/Documents/SampleBank/Views/BankAccounts/AddBeneficiaries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua0FjY291bnRzL0FkZEJlbmVmaWNpYXJpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/husseiny.a.z/Documents/SampleBank/Views/BankAccounts/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua0FjY291bnRzL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -193,6 +197,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/husseiny.a.z/Documents/SampleBank/Views/BankAccounts/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua0FjY291bnRzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/husseiny.a.z/Documents/SampleBank/Views/BankAccounts/_BankAccountCard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQmFua0FjY291bnRzL19CYW5rQWNjb3VudENhcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/husseiny.a.z/Documents/SampleBank/Views/Home/Actions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9BY3Rpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/husseiny.a.z/Documents/SampleBank/Views/Home/Index.cshtml]
@@ -239,8 +251,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL19EZXBvc2l0Rm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_innerTransactionForm.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL19pbm5lclRyYW5zYWN0aW9uRm9ybS5jc2h0bWw=
+[/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_InnerTransactionForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVHJhbnNhY3Rpb25zL19Jbm5lclRyYW5zYWN0aW9uRm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/husseiny.a.z/Documents/SampleBank/Views/Transactions/_OuterTransactionForm.cshtml]

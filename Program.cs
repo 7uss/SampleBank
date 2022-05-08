@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SampleBank.Data;
 using SampleBank.Models;
+using SampleBank.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +24,8 @@ builder.Services.AddIdentity<AdvanceUser, IdentityRole>(options => {
     .AddDefaultUI();
 
 builder.Services.AddRazorPages();
-
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<SampleService>();
 
 var app = builder.Build();
 
@@ -47,6 +48,10 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+// app.MapControllerRoute(
+//     name: "apiControllers",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
